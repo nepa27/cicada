@@ -8,11 +8,11 @@ import spacy
 from spacy import Language
 from sentence_transformers import SentenceTransformer
 
-from clasterization import get_clasters
+from utils.clasterization import get_clasters
 from db_test import database
-from decorators import time_work_dec
-from ner_emb import get_ner, get_embedding
-from summary import get_preview
+from utils.decorators import time_work_dec
+from utils.ner_emb import get_ner, get_embedding
+from utils.summary import get_preview
 
 
 load_dotenv()
