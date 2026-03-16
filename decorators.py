@@ -1,8 +1,9 @@
 import time
 from functools import wraps
+from typing import Callable
 
 
-def time_work_dec(func):
+def time_work_dec(func: Callable):
     @wraps(func)
     def wrapper(*args, **kwargs):
         start_time = time.time()
