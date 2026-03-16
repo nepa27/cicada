@@ -3,7 +3,7 @@ from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.text_rank import TextRankSummarizer
 
 
-def extractive_summary(text: str, sentences_count: int=2):
+def extractive_summary(text: str, sentences_count: int):
     parser = PlaintextParser.from_string(text, Tokenizer("russian"))
     summarizer = TextRankSummarizer()
     summary = summarizer(parser.document, sentences_count)
