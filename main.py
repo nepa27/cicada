@@ -20,13 +20,19 @@ SPACY_MODEL = getenv("SPACY_MODEL")
 ST_MODEL = getenv("ST_MODEL")
 PUNKT = getenv("PUNKT")
 
+try:
+    nlp_spacy: Language = spacy.load(SPACY_MODEL)
+except OSError:
+    raise OSError(f"Не найдена модель {SPACY_MODEL}")
 
-nlp_spacy: Language = spacy.load(SPACY_MODEL)
+try:
+    model_st = SentenceTransformer(
+        model_name_or_path=ST_MODEL,
+        local_files_only=True
+    )
+except FileNotFoundError:
+    raise FileNotFoundError(f"Неверно указан путь: {ST_MODEL}")
 
-model_st = SentenceTransformer(
-    model_name_or_path=ST_MODEL,
-    local_files_only=True
-)
 nltk.download(PUNKT)
 
 
@@ -49,12 +55,13 @@ def processed_data(data: list[dict]) -> list:
 
     clasters = get_clasters(embeddings)
 
+    # Тестовый вывод данных
     test_result: defaultdict = defaultdict(list)
 
     for i, number in enumerate(clasters):
         test_result[int(number)].append(result[i])
 
-    print(json.dumps(test_result, indent=4, ensure_ascii=False))
+    print(json.dumps(test_result, indent=4, ensure_ascii=False, sort_keys=True))
     return result
 
 
