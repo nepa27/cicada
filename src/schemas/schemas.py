@@ -16,3 +16,17 @@ class DirtDataCreateSchema(BaseModel):
 
 class DirtDataGetSchema(DirtDataCreateSchema):
     pass
+
+
+class ProcessedPostsCreateSchema(BaseModel):
+    entities: list
+    embedding: list
+    summarization: str
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class ProcessedPostsGetSchema(ProcessedPostsCreateSchema):
+    pass
