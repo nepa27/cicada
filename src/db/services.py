@@ -37,6 +37,4 @@ class DirtDataService:
     @staticmethod
     async def parse_iso_datetime(iso_str: str) -> datetime:
         """Преобразует ISO строку в datetime с timezone."""
-        if iso_str.endswith('Z'):
-            iso_str = iso_str[:-1] + '+00:00'
         return datetime.fromisoformat(iso_str)
